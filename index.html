@@ -2,60 +2,61 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aplikacja Pogodowa</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #e0f7fa; }
-    .container { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-    h1 { text-align: center; }
-    input, button { width: 100%; padding: 10px; margin-top: 10px; }
-    .weather { margin-top: 20px; padding: 15px; background: #f1f8e9; border-radius: 5px; }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Weather App</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <div class="container">
-    <h1>Sprawdź pogodę</h1>
-    <form id="weatherForm">
-      <input type="text" id="city" placeholder="Wprowadź nazwę miasta" required />
-      <button type="submit">Pokaż pogodę</button>
+    <header>
+      <h1>Aplikacja Pogodowa</h1>
+      <div class="controls">
+        <select id="language" aria-label="Wybór języka">
+          <option value="pl" selected>Polski</option>
+          <option value="en">English</option>
+        </select>
+        <button id="toggleTheme" aria-label="Przełącz tryb jasny/ciemny">🌙</button>
+      </div>
+    </header>
+
+    <form id="weatherForm" aria-label="Formularz wyszukiwania miasta">
+      <input id="city" type="text" placeholder="Wpisz miasto" required autocomplete="off" />
+      <button type="submit">Pobierz pogodę</button>
     </form>
 
-    <div class="weather" id="weatherInfo" style="display:none">
-      <h3>Aktualna pogoda:</h3>
+    <div id="loader" class="hidden" role="status" aria-live="polite">
+      <div class="spinner"></div> Ładowanie...
+    </div>
+
+    <section id="weatherInfo" class="hidden" aria-live="polite">
+      <h2 id="cityName"></h2>
       <p id="weatherDescription"></p>
       <p id="temperature"></p>
       <p id="humidity"></p>
-      <button onclick="resetForm()">Wyszukaj inne miasto</button>
-    </div>
+      <p id="wind"></p>
+
+      <button id="addFavorite" aria-label="Dodaj do ulubionych">Dodaj do ulubionych</button>
+
+      <canvas id="weatherChart" aria-label="Wykres danych pogodowych" role="img"></canvas>
+
+      <div id="forecast" class="forecast-container"></div>
+
+      <button id="reset" aria-label="Wróć do wyszukiwania">Wróć</button>
+    </section>
+
+    <section class="history-favorites">
+      <div>
+        <h3>Historia wyszukiwań</h3>
+        <ul id="historyList" tabindex="0" aria-label="Lista historii wyszukiwań"></ul>
+      </div>
+      <div>
+        <h3>Ulubione miasta</h3>
+        <ul id="favoritesList" tabindex="0" aria-label="Lista ulubionych miast"></ul>
+      </div>
+    </section>
   </div>
-  <script>
-    const form = document.getElementById('weatherForm');
-    const weatherInfo = document.getElementById('weatherInfo');
-    const description = document.getElementById('weatherDescription');
-    const temperature = document.getElementById('temperature');
-    const humidity = document.getElementById('humidity');
 
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const city = document.getElementById('city').value;
-      fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=YOUR_API_KEY&units=metric&lang=pl`)
-        .then(res => res.json())
-        .then(data => {
-          description.textContent = `Opis: ${data.weather[0].description}`;
-          temperature.textContent = `Temperatura: ${data.main.temp}°C`;
-          humidity.textContent = `Wilgotność: ${data.main.humidity}%`;
-
-          form.style.display = 'none';
-          weatherInfo.style.display = 'block';
-        })
-        .catch(err => alert('Nie udało się pobrać danych pogodowych.'));
-    });
-
-    function resetForm() {
-      form.reset();
-      form.style.display = 'block';
-      weatherInfo.style.display = 'none';
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
