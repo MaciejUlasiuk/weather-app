@@ -14,6 +14,58 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+}
+
+#authContainer {
+  width: 100%;
+  max-width: 400px;
+  padding: 40px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+#authContainer h2 {
+  margin-bottom: 25px;
+  color: #333;
+}
+
+#authContainer form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+#authContainer input {
+  padding: 14px 18px;
+  font-size: 1rem;
+  border-radius: 10px;
+  border: 1.5px solid #bbb;
+  box-shadow: inset 0 1px 4px rgb(0 0 0 / 0.1);
+}
+
+#authContainer button {
+  padding: 14px;
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+#authContainer p {
+  margin-top: 20px;
+}
+
+#authContainer a {
+  color: #2196f3;
+  font-weight: 600;
+  text-decoration: none;
 }
 
 .container {
@@ -31,6 +83,7 @@ header {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 30px;
+  flex-wrap: wrap;
 }
 
 header h1 {
@@ -43,6 +96,20 @@ header h1 {
   display: flex;
   gap: 15px;
   align-items: center;
+}
+
+#userInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+}
+
+#logoutBtn {
+  background-color: #f44336;
+  color: white;
+  font-size: 0.9rem;
+  padding: 8px 12px;
 }
 
 select, button {
@@ -69,7 +136,6 @@ select:hover, button:hover {
   user-select: none;
 }
 
-/* Form */
 form {
   display: flex;
   gap: 15px;
@@ -107,7 +173,6 @@ button[type="submit"]:hover {
   box-shadow: 0 6px 16px rgb(23 105 170 / 0.7);
 }
 
-/* Loader */
 #loader {
   display: flex;
   align-items: center;
@@ -136,7 +201,6 @@ button[type="submit"]:hover {
   display: none !important;
 }
 
-/* Weather Info */
 #weatherInfo {
   background: #fdfdfd;
   padding: 30px 35px;
@@ -192,7 +256,6 @@ button[type="submit"]:hover {
   box-shadow: 0 8px 20px rgb(198 40 40 / 0.7);
 }
 
-/* Forecast */
 .forecast-container {
   display: flex;
   justify-content: center;
@@ -217,7 +280,6 @@ button[type="submit"]:hover {
   color: #333;
 }
 
-/* Chart */
 canvas {
   max-width: 100%;
   margin-top: 30px;
@@ -225,7 +287,6 @@ canvas {
   box-shadow: 0 4px 20px rgb(33 150 243 / 0.3);
 }
 
-/* History & Favorites */
 .history-favorites {
   display: flex;
   justify-content: space-between;
@@ -273,10 +334,28 @@ ul li:focus {
   outline: none;
 }
 
-/* Dark Mode */
 body.dark {
   background-color: #121212;
   color: #ddd;
+}
+
+body.dark #authContainer {
+  background-color: #1e1e1e;
+  box-shadow: 0 8px 28px rgba(255 255 255, 0.1);
+}
+
+body.dark #authContainer h2, body.dark #authContainer p, body.dark #authContainer a {
+  color: #eee;
+}
+
+body.dark #authContainer a {
+  color: #90caf9;
+}
+
+body.dark #authContainer input {
+    background-color: #2c2c2c;
+    border-color: #555;
+    color: #ddd;
 }
 
 body.dark .container {
@@ -360,9 +439,8 @@ body.dark ul li:focus {
   color: #222;
 }
 
-/* Responsive */
 @media (max-width: 720px) {
-  form {
+  #weatherForm {
     flex-direction: column;
   }
 

@@ -8,10 +8,38 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <div class="container">
+
+  <div id="authContainer">
+    <div id="loginFormContainer">
+      <h2>Logowanie</h2>
+      <form id="loginForm">
+        <input id="loginUsername" type="text" placeholder="Nazwa użytkownika" required autocomplete="username">
+        <input id="loginPassword" type="password" placeholder="Hasło" required autocomplete="current-password">
+        <button type="submit">Zaloguj się</button>
+      </form>
+      <p>Nie masz konta? <a href="#" id="showRegister">Zarejestruj się</a></p>
+    </div>
+
+    <div id="registerFormContainer" class="hidden">
+      <h2>Rejestracja</h2>
+      <form id="registerForm">
+        <input id="registerUsername" type="text" placeholder="Nazwa użytkownika" required autocomplete="username">
+        <input id="registerPassword" type="password" placeholder="Hasło" required autocomplete="new-password">
+        <button type="submit">Zarejestruj się</button>
+      </form>
+      <p>Masz już konto? <a href="#" id="showLogin">Zaloguj się</a></p>
+    </div>
+  </div>
+
+
+  <div class="container hidden">
     <header>
       <h1>Aplikacja Pogodowa</h1>
       <div class="controls">
+        <div id="userInfo">
+          Witaj, <span id="currentUsername"></span>
+          <button id="logoutBtn">Wyloguj</button>
+        </div>
         <select id="language" aria-label="Wybór języka">
           <option value="pl" selected>Polski</option>
           <option value="en">English</option>
